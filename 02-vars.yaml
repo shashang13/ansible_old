@@ -13,6 +13,8 @@
     sample-vars.yaml
   tasks:
     - name: File level variable
+      URL:
+        overridden.example.com
       ansible.builtin.debug:
         msg: URL = {{URL}}
 
