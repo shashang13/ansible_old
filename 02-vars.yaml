@@ -12,5 +12,6 @@
   vars_files:
     sample-vars.yaml
   tasks:
-    ansible.builtin.debug:
-      msg: URL = {{URL}}
+    - name: File level variable
+      ansible.builtin.debug:
+        msg: URL = {{URL}}
