@@ -15,6 +15,14 @@
     - name: File level variable
       ansible.builtin.debug:
         msg: URL = {{URL}}
+
+- name: Variable defined at task level
+  hosts: all
+  vars_files:
+    sample-vars.yaml
+  tasks:
     - name: Task level variable
+      vars:
+        URL: task.example.com
       ansible.builtin.debug:
         msg: URL = {{URL}}
