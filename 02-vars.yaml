@@ -50,4 +50,4 @@
 
     - name: Registered variable
       ansible.builtin.debug:
-        msg: {{OUT}}
+        msg: "{{OUT}}"
