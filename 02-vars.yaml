@@ -13,8 +13,6 @@
     sample-vars.yaml
   tasks:
     - name: File level variable
-      vars:
-        URL: overridden.example.com
       ansible.builtin.debug:
         msg: URL = {{URL}}
 
@@ -33,7 +31,12 @@
   hosts: all
   tasks:
     - name: Print inventory variable
-      vars:
-        URL: overridden-inv.example.com
       ansible.builtin.debug:
         msg: URL = {{URL}}
+
+- name: Predefined variables
+  hosts: all
+  tasks:
+    - name: Print predefined variable
+      ansible.builtin.debug:
+        msg: AWS INFO = {{ansible_chassis_vendor}}
