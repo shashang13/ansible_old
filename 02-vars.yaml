@@ -39,4 +39,4 @@
   tasks:
     - name: Print predefined variable
       ansible.builtin.debug:
-        msg: AWS INFO = {{ansible_chassis_vendor}}
+        msg: AWS INFO = {{ansible_chassis_vendor}}, IP Address = {{ansible_eth0.ipv4}}
