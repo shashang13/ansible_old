@@ -49,5 +49,9 @@
       register: OUT
 
     - name: Registered variable
+#      ansible.builtin.debug:
+#        msg: "{{OUT.stdout}}"
+      ansible.builtin.set_fact:
+        OUTPUT: "{{OUT.stdout}}"
       ansible.builtin.debug:
-        msg: "{{OUT.stdout}}"
+        msg: "{{OUTPUT}}"
