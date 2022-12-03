@@ -33,5 +33,7 @@
   hosts: all
   tasks:
     - name: Print inventory variable
+      vars:
+        URL: overridden-inv.example.com
       ansible.builtin.debug:
         msg: URL = {{URL}}
