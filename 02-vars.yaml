@@ -15,3 +15,6 @@
     - name: File level variable
       ansible.builtin.debug:
         msg: URL = {{URL}}
+    - name: Task level variable
+      ansible.builtin.debug:
+        msg: URL = {{URL}}
