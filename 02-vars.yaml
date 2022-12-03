@@ -56,6 +56,6 @@
       ansible.builtin.debug:
         msg: "{{OUT.stdout}}"
 
-    - name: Print set a fact var
+    - name: Print OUTPUT var
       ansible.builtin.debug:
         msg: "{{OUTPUT}}"
