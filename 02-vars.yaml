@@ -9,7 +9,7 @@
 
 - name: Variables from a file
   hosts: all
-  var_file:
+  vars_files:
     sample-vars.yaml
   tasks:
     ansible.builtin.debug:
