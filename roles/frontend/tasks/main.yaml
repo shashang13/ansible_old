@@ -15,7 +15,7 @@
     name: nginx
     state: installed
 
-- name: Download and unip frontend application.
+- name: Download and unzip frontend application.
   ansible.builtin.unarchive:
     src: https://github.com/roboshop-devops-project/frontend/archive/main.zip
     dest: /tmp/

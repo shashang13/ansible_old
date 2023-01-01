@@ -1,11 +1,3 @@
-
-#    then restart the service
-#
-#    ```bash
-#    # systemctl restart mongod
-#
-#    ```
-#
 #    ## Every Database needs the schema to be loaded for the application to work.
 #
 #    Download the schema and load it.
@@ -32,3 +24,19 @@
     daemon_reload: yes
     enabled: yes
     name: mongod
+
+- name: Download and unzip MongoDb schemas.
+  ansible.builtin.unarchive:
+    src: https://github.com/roboshop-devops-project/mongodb/archive/main.zip
+    dest: /tmp/
+    remote_src: yes
+
+- name: Load MongoDb Catalogue Schema
+  community.mongodb.mongodb_shell:
+    file: "/tmp/mongodb-main/catalogue.js"
+    idempotent: yes
+
+- name: Load MongoDb Users Schema
+  community.mongodb.mongodb_shell:
+    file: "/tmp/mongodb-main/users.js"
+    idempotent: yes
