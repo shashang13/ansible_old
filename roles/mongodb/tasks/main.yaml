@@ -1,0 +1,34 @@
+
+#    then restart the service
+#
+#    ```bash
+#    # systemctl restart mongod
+#
+#    ```
+#
+#    ## Every Database needs the schema to be loaded for the application to work.
+#
+#    Download the schema and load it.
+
+- name: Copy MongoDb repo file
+  ansible.builtin.copy:
+    src:  mongodb.repo
+    dest: /etc/yum.repos.d/mongodb.repo
+
+- name: MongoDb installation
+  ansible.builtin.yum:
+    name: mongodb-org
+    state: installed
+
+- name: Update MongoDb Listen Ip Address
+  ansible.builtin.replace:
+    path: /etc/mongod.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: Start MongoDb service
+  ansible.builtin.systemd:
+    state: started
+    daemon_reload: yes
+    enabled: yes
+    name: mongod

@@ -13,7 +13,7 @@
 - name: Nginx installation
   ansible.builtin.yum:
     name: nginx
-    state: latest
+    state: installed
 
 - name: Download and unip frontend application.
   ansible.builtin.unarchive:
