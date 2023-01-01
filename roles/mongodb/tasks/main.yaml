@@ -1,7 +1,3 @@
-#    ## Every Database needs the schema to be loaded for the application to work.
-#
-#    Download the schema and load it.
-
 - name: Copy MongoDb repo file
   ansible.builtin.copy:
     src:  mongodb.repo
