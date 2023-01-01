@@ -25,7 +25,7 @@
     enabled: yes
     name: mongod
 
-- name: Download and unzip Mongodb application.
+- name: Download and Extract Mongodb application.
   ansible.builtin.include_role:
     name: common
     tasks_from: download
