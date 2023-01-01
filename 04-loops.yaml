@@ -1,0 +1,10 @@
+- name: Loops demonstration.
+  hosts: localhost
+  tasks:
+    - name: Loops showcase
+      ansible.builtin.debug:
+        msg: Iterating over fruits list - {{item}}
+      loop:
+        - orange
+        - mango
+        - apply
