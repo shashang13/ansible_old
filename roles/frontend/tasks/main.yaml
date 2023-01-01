@@ -15,8 +15,8 @@
     name: nginx
     state: installed
 
-- name: Download and Extract frontend application.
-  ansible.builtin.include_role:
+- name: Download and unzip frontend application.
+  include_role:
     name: common
     tasks_from: download
 
