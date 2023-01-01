@@ -7,4 +7,11 @@
       loop:
         - orange
         - mango
-        - apply
+        - apple
+    - name: Loops with map list
+      ansible.builtin.debug:
+        msg: Fruit Name - {{item.name}}, Count - {{item.count}}
+      loop:
+        - { name: orange, count:10 }
+        - { name: mango, count: 20 }
+        - { name: apple, count: 30 }
