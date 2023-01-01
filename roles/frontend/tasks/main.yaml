@@ -16,7 +16,7 @@
     state: installed
 
 - name: Download and unzip FRONTEND application.
-  ansible.builtin.include_role:
+  include_role:
     name: common
     tasks_from: download
 
