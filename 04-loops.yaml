@@ -12,6 +12,6 @@
       ansible.builtin.debug:
         msg: Fruit Name - {{item.name}}, Count - {{item.count}}
       loop:
-        - { name: orange, count:10 }
-        - { name: mango, count: 20 }
-        - { name: apple, count: 30 }
+        - { name: 'orange', count:'10' }
+        - { name: 'mango', count: '20' }
+        - { name: 'apple', count: '30' }
