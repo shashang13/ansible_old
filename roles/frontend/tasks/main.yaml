@@ -7,7 +7,6 @@
   include_role:
     name: common
     tasks_from: download
-  debugger: on_failed
 
 - name: Recursively remove previous Nginx installation
   ansible.builtin.file:

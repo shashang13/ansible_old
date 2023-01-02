@@ -25,7 +25,6 @@
   include_role:
     name: common
     tasks_from: download
-  debugger: on_skipped
 
 - name: Load MongoDb Catalogue Schema
   community.mongodb.mongodb_shell:
