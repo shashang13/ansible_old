@@ -1,7 +1,7 @@
-- name: Install yum repo
+- name: Install Nodejs repo
   ansible.builtin.shell: curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -
 
-- name: Install a list of packages (suitable replacement for 2.11 loop deprecation warning)
+- name: Install Nodejs packages
   ansible.builtin.yum:
     name:
       - nodejs
@@ -11,7 +11,7 @@
 - name: Create user 'roboshop'
   ansible.builtin.user:
     name: roboshop
-    comment: John Doe
+    comment: Application user
 
 - name: Download and unzip Catalogue application.
   include_role:

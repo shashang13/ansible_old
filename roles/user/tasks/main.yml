@@ -1,0 +1,33 @@
+#1. Update SystemD service file,
+#
+#Update `REDIS_ENDPOINT` with Redis Server IP
+#
+#Update `MONGO_ENDPOINT` with MongoDB Server IP
+
+#2. Now, lets set up the service with systemctl.
+
+- name: Install nodejs and its dependencies
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: nodejsinstall
+
+- name: Create user 'roboshop'
+  ansible.builtin.user:
+    name: roboshop
+    comment: Application user
+
+- name: Install user application code.
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+- name: Copy user content to the application path.
+  ansible.builtin.copy:
+    src: /tmp/user-main/
+    dest: /home/roboshop/user/
+  become_user: roboshop
+
+- name: Install nodejs dependencies.
+  community.general.npm:
+    path: /home/roboshop/user
+  become_user: roboshop
