@@ -1,15 +1,3 @@
-#- name: Setup Frontend Component
-#  hosts: FRONTEND
-#  become: yes
-#  roles:
-#    - frontend
-#
-#- name: Setup Mongodb Component
-#  hosts: MONGODB
-#  become: yes
-#  roles:
-#    - mongodb
-
 - name: Setup {{COMPONENT}} Component
   become: yes
   hosts: '{{HOST}}'
