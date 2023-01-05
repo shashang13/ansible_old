@@ -4,8 +4,9 @@
     dest: /etc/yum.repos.d/
 
 - name: Install Redis.
-  ansible.builtin.yum: redis-6.2.7
-  state: installed
+  ansible.builtin.yum:
+    name: redis-6.2.7
+    state: installed
 
 - name: Update Redis configuration - Listen address.
   ansible.builtin.replace:
