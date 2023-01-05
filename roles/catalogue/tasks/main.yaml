@@ -1,12 +1,17 @@
-- name: Install Nodejs repo
-  ansible.builtin.shell: curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -
+#- name: Install Nodejs repo
+#  ansible.builtin.shell: curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -
+#
+#- name: Install Nodejs packages
+#  ansible.builtin.yum:
+#    name:
+#      - nodejs
+#      - gcc-c++
+#    state: installed
 
-- name: Install Nodejs packages
-  ansible.builtin.yum:
-    name:
-      - nodejs
-      - gcc-c++
-    state: installed
+- name: Install nodejs
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: nodejsinstall
 
 - name: Create user 'roboshop'
   ansible.builtin.user:

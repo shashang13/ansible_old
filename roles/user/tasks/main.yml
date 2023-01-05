@@ -6,7 +6,7 @@
 
 #2. Now, lets set up the service with systemctl.
 
-- name: Install nodejs and its dependencies
+- name: Install nodejs
   ansible.builtin.include_role:
     name: common
     tasks_from: nodejsinstall
