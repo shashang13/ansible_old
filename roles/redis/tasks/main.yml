@@ -12,10 +12,7 @@
   ansible.builtin.replace:
     regexp: '127.0.0.1'
     replace: '0.0.0.0'
-    path: "{{item}}"
-  loop:
-    - /etc/{{COMPONENT}}.conf
-    - /etc/{{COMPONENT}}/{{COMPONENT}}.conf
+    path: /etc/redis.conf
 
 - name: Start Redis DB
   ansible.builtin.systemd:
