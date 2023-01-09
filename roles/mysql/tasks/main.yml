@@ -61,6 +61,5 @@
 
 - name: Download mysql repo
   ansible.builtin.get_url:
-    src: https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
+    url: https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
     dest: /etc/yum.repos.d/mysql.repo
-    remote_src: yes
