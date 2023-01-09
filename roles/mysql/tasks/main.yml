@@ -60,8 +60,9 @@
 ## mysql -u root -pRoboShop@1 <shipping.sql
 
 - name: Copy mysql repo file
-  src: mysql.repo
-  dest: /etc/yum.repos.d/
+  ansible.builtin.copy
+    src: mysql.repo
+    dest: /etc/yum.repos.d/
 
 #- name: Download mysql repo
 #  ansible.builtin.get_url:
