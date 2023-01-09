@@ -59,7 +59,21 @@
 ## cd mysql-main
 ## mysql -u root -pRoboShop@1 <shipping.sql
 
-- name: Download mysql repo
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
-    dest: /etc/yum.repos.d/mysql.repo
+- name: Copy mysql repo file
+  src: mysql.repo
+  dest: /etc/yum.repos.d/mysql.repo
+
+#- name: Download mysql repo
+#  ansible.builtin.get_url:
+#    url: https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
+#    dest: /etc/yum.repos.d/mysql.repo
+
+- name: Install mysql
+  ansible.builtin.yum:
+    name: mysql-community-server
+    state: installed
+
+- name: Start MySQL.
+  ansible.builtin.systemd:
+    name: mysqld
+    state: started
