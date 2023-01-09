@@ -61,7 +61,7 @@
 
 - name: Copy mysql repo file
   src: mysql.repo
-  dest: /etc/yum.repos.d/mysql.repo
+  dest: /etc/yum.repos.d/
 
 #- name: Download mysql repo
 #  ansible.builtin.get_url:
