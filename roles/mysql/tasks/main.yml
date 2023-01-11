@@ -64,14 +64,5 @@
   community.mysql.mysql_info:
     login_user: root
     login_password: RoboShop@1
-#
-#  ignore_errors: true
-#
-#- name: Get default mysql root password
-#  ansible.builtin.shell: grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}'
-#  set_fact: "{{DEFAULT_ROOT_PASSWORD}}"
-#  ignore_errors: true
-#
-#- name: Debug def root pass
-#  ansible.builtin.debug:
-#    msg: "{{DEFAULT_ROOT_PASSWORD}}"
+  register: "{{mysql_stat}}"
+  ignore_errors: true
