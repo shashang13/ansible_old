@@ -65,6 +65,7 @@
 - name: Get default mysql root password
   ansible.builtin.shell: grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}'
   set_fact: "{{DEFAULT_ROOT_PASSWORD}}"
+  ignore_errors: true
 
 - name: Debug def root pass
   ansible.builtin.debug:
