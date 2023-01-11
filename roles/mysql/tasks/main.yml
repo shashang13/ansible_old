@@ -60,12 +60,16 @@
     name: mysqld
     state: started
 
-- name: Get MySQL version with non-default credentials
+- name: Trying MYSQL login
   community.mysql.mysql_info:
     login_user: root
     login_password: RoboShop@1
   register: mysql_stat
   ignore_errors: true
+
+- name: Print mysql_stat
+  ansible.builtin.debug:
+    msg: "{{mysql_stat}}"
 
 - name: Reset root password
   when: mysql_stat.failed
