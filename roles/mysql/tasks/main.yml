@@ -89,6 +89,10 @@
   register: plugin_check
   ignore_errors: yes
 
+- name: display plugin
+  ansible.builtin.debug:
+    msg: "{{plugin_check}}"
+
 - name: Remove plugin
   when: plugin_check
   block:
