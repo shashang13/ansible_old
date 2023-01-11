@@ -64,5 +64,5 @@
   community.mysql.mysql_info:
     login_user: root
     login_password: RoboShop@1
-  register: "{{mysql_stat}}"
+  register: mysql_stat
   ignore_errors: true
