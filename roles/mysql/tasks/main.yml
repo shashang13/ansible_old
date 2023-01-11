@@ -62,6 +62,10 @@
   ansible.builtin.shell: echo 'show databases'|mysql -uroot -p'RoboShop@1'
   ignore_errors: true
 
-- name: Run this check task
+- name: Get default mysql root password
+  ansible.builtin.shell: grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}'
+  set_fact: "{{DEFAULT_ROOT_PASSWORD}}"
+
+- name: Debug def root pass
   ansible.builtin.debug:
-    msg: "This task runs"
+    msg: "{{DEFAULT_ROOT_PASSWORD}}"
