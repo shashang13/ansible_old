@@ -58,3 +58,11 @@
         dest: /tmp
     - name: Plugin removal
       ansible.builtin.shell: mysql -uroot -pRoboShop@1 </tmp/plugin.sql
+
+- name: Download and Unarchive Shipping schema.
+  ansible.builtin.include_role:
+    name: common
+    task_from: download
+
+- name: Load Shipping Schema
+  ansible.builtin.shell: mysql -u root -pRoboShop@1 </tmp/shipping.sql
