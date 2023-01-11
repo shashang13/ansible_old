@@ -67,10 +67,6 @@
   register: mysql_stat
   ignore_errors: true
 
-- name: Print mysql_stat
-  ansible.builtin.debug:
-    msg: "{{mysql_stat}}"
-
 - name: Reset root password
   when: mysql_stat.failed
   block:
@@ -88,3 +84,17 @@
       when: mysql_stat.failed
       ansible.builtin.shell: mysql --connect-expired-password -uroot -p"{{DEFAULT_ROOT_PASSWD.stdout}}" </tmp/rootpass.sql
 
+- name: Plugin check
+  ansible.builtin.shell: echo 'show plugins'|mysql -uroot -p'RoboShop@1'| grep validate_password
+  register: plugin_check
+  ignore_errors: yes
+
+- name: Remove plugin
+  when: plugin_check
+  block:
+    - name: Copy the plugin.sql file
+      ansible.builtin.copy:
+        src: plugin.sql
+        dest: /tmp
+    - name: Plugin removal
+      ansible.builtin.shell: mysql -uroot -pRoboShop@1 </tmp/plugin.sql
