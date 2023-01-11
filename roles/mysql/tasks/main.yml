@@ -94,7 +94,7 @@
     msg: "{{plugin_check}}"
 
 - name: Remove plugin
-  when: plugin_check
+  when: plugin_check.rc == 0
   block:
     - name: Copy the plugin.sql file
       ansible.builtin.copy:
