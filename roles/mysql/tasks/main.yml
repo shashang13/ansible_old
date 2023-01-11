@@ -57,7 +57,12 @@
         src: plugin.sql
         dest: /tmp
     - name: Plugin removal
-      ansible.builtin.shell: mysql -uroot -pRoboShop@1 </tmp/plugin.sql
+      community.mysql.mysql_db:
+        state: import
+        name: all
+        target: /tmp/plugin.sql
+        login_user: root
+        login_password: RoboShop@1
 
 - name: Download and Unarchive Shipping schema.
   ansible.builtin.include_role:
@@ -66,3 +71,11 @@
 
 - name: Load Shipping Schema
   ansible.builtin.shell: mysql -u root -pRoboShop@1 </tmp/{{COMPONENT}}-main/shipping.sql
+
+- name: Load Shipping Schema
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /tmp/{{COMPONENT}}-main/shipping.sql
+    login_user: root
+    login_password: RoboShop@1
