@@ -65,4 +65,4 @@
     tasks_from: download
 
 - name: Load Shipping Schema
-  ansible.builtin.shell: mysql -u root -pRoboShop@1 </tmp/mysql-main/shipping.sql
+  ansible.builtin.shell: mysql -u root -pRoboShop@1 </tmp/{{COMPONENT}}-main/shipping.sql
