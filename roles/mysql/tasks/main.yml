@@ -60,6 +60,7 @@
 
 - name: Check mysql access.
   ansible.builtin.shell: echo 'show databases'|mysql -uroot -p'RoboShop@1'
+  ignore_errors: yes
 
 - name: Run this check task
   ansible.builtin.debug:
