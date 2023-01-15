@@ -15,6 +15,6 @@
   become_user: roboshop
 
 - name: Start {{COMPONENT}} Service
-  ansible.builtin.inclue_role:
+  ansible.builtin.include_role:
     name: common
     tasks_from: systemd
