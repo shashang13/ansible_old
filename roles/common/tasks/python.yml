@@ -1,0 +1,40 @@
+- name: Python3 installation
+  ansible.builtin.yum:
+    name:
+      - python36
+      - gcc
+      - python3-devel
+    state: installed
+
+
+- name: Setup application user and the application.
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+- name: Install python dependencies
+  ansible.builtin.pip:
+    chdir: /home/roboshop/{{COMPONENT}}
+    requirements: requirements.txt
+    executable: pip3
+
+#- name: Update payment.ini file
+#  ansible.builtin.lineinfile:
+#    path: /home/roboshop/{{COMPONENT}}
+#    regexp: '^User'
+#    line: 127.0.0.1 localhost
+#
+#
+#    1. Update the roboshop user and group id in `payment.ini` file.
+#
+#
+#
+#    2. Update SystemD service file
+#
+#    Update `CARTHOST` with cart server ip
+#
+#    Update `USERHOST` with user server ip
+#
+#    Update `AMQPHOST` with RabbitMQ server ip.
+#
+#    3. Setup the service
