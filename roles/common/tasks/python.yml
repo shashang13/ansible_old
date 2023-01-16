@@ -21,7 +21,7 @@
 - name: Update User id in application configuration
   ansible.builtin.lineinfile:
     path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
-    regexp: '^User'
+    regexp: '^uid'
     line: uid = {{APP_USER.uid}}
 
 - name: Update Group id in application configuration
