@@ -18,18 +18,6 @@
     requirements: requirements.txt
     executable: pip3
 
-#- name: Update User id in application configuration
-#  ansible.builtin.lineinfile:
-#    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
-#    regexp: '^uid'
-#    line: uid = {{APP_USER.uid}}
-#
-#- name: Update Group id in application configuration
-#  ansible.builtin.lineinfile:
-#    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
-#    regexp: '^gid'
-#    line: gid = {{APP_USER.group}}
-
 - name: Update
   ansible.builtin.lineinfile:
     path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
