@@ -18,23 +18,19 @@
     requirements: requirements.txt
     executable: pip3
 
-#- name: Update payment.ini file
-#  ansible.builtin.lineinfile:
-#    path: /home/roboshop/{{COMPONENT}}
-#    regexp: '^User'
-#    line: 127.0.0.1 localhost
-#
-#
-#    1. Update the roboshop user and group id in `payment.ini` file.
-#
-#
-#
-#    2. Update SystemD service file
-#
-#    Update `CARTHOST` with cart server ip
-#
-#    Update `USERHOST` with user server ip
-#
-#    Update `AMQPHOST` with RabbitMQ server ip.
-#
-#    3. Setup the service
+- name: Update User id in application configuration
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+    regexp: '^User'
+    line: uid = {{APP_USER.uid}}
+
+- name: Update Group id in application configuration
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+    regexp: '^gid'
+    line: gid = {{APP_USER.group}}
+
+- name: Start the Payment Service.
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd
