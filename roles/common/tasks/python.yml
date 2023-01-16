@@ -18,17 +18,27 @@
     requirements: requirements.txt
     executable: pip3
 
-- name: Update User id in application configuration
-  ansible.builtin.lineinfile:
-    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
-    regexp: '^uid'
-    line: uid = {{APP_USER.uid}}
+#- name: Update User id in application configuration
+#  ansible.builtin.lineinfile:
+#    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+#    regexp: '^uid'
+#    line: uid = {{APP_USER.uid}}
+#
+#- name: Update Group id in application configuration
+#  ansible.builtin.lineinfile:
+#    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+#    regexp: '^gid'
+#    line: gid = {{APP_USER.group}}
 
-- name: Update Group id in application configuration
+- name: Update
   ansible.builtin.lineinfile:
     path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
-    regexp: '^gid'
-    line: gid = {{APP_USER.group}}
+    regexp: "{{item.regexp}}"
+    line: "{{item.line}}"
+  loop:
+    - {regexp: '^uid', line: 'uid = {{APP_USER.uid}}'}
+    - {regexp: '^gid', line: 'gid = {{APP_USER.group}}'}
+
 
 - name: Start the Payment Service.
   ansible.builtin.include_role:
