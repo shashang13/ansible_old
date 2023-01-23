@@ -5,4 +5,4 @@
   tasks:
     - name: Convert string to upper
       ansible.builtin.debug:
-        msg: {{a|upper}}
+        msg: "{{a|upper}}"
