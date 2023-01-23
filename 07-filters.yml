@@ -1,0 +1,8 @@
+- name: Ansible filters
+  hosts: localhost
+  vars:
+    a: abc
+  tasks:
+    - name: Convert string to upper
+      ansible.builtin.debug:
+        msg: {{a|upper}}
