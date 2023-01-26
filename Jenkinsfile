@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage ('Roboshop Dry Run') {
       steps {
-        ssh '''
+        sh '''
           ansible-playbook roboshop.yaml -e HOST=FRONTEND -e role_name=frontend -C
         '''
       }
