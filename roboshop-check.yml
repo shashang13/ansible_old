@@ -9,6 +9,7 @@
   tasks:
     - name: Launch instance
       ec2:
+        count: 1
         group_id: "{{ security_group_id }}"
         instance_type: "{{ instance_type }}"
         image: "{{ image }}"
@@ -16,7 +17,6 @@
         region: "{{ region }}"
         vpc_subnet_id: subnet-0d493668
         assign_public_ip: yes
-        count: 1
         instance_tags:
           Name: Check-Instance
       register: ec2
