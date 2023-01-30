@@ -34,6 +34,10 @@
         timeout: 120
       loop: "{{ ec2.instances }}"
 
+    - name: Set Instance_Id variable to pass to next plan.
+      set_fact:
+        Instance_Id: "{{ ec2.instance_ids }}"
+
 - name: New play to execute role to test
   hosts: launched
   become: True
@@ -48,5 +52,5 @@
     - name: Terminate instances that were previously launched
       ec2:
         state: 'absent'
-        instance_ids: '{{ ec2.instance_ids }}'
+        instance_ids: '{{ Instance_Id }}'
         region: "{{ region }}"
