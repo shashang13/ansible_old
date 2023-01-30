@@ -86,7 +86,7 @@
         tags:
           Name: Check-Instance
         interruption: stop
-      register: spotEc2
+#      register: spotEc2
 
     - name: Spot Request Termination
       amazon.aws.ec2_spot_instance:
