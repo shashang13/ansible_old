@@ -69,14 +69,14 @@
   tasks:
     - name: Create a new spot request
       amazon.aws.ec2_spot_instance:
+        count: 1
         launch_specification:
-          count: 1
           group_id: "{{ security_group_id }}"
           instance_type: "{{ instance_type }}"
           image: "{{ image }}"
           wait: true
-          region: "{{ region }}"
           subnet_id: subnet-0d493668
+        region: "{{ region }}"
         network_interfaces:
           - associate_public_ip_address: True
             delete_on_termination: True
