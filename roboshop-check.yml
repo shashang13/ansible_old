@@ -1,3 +1,63 @@
+#- name: Create a sandbox instance
+#  hosts: localhost
+#  gather_facts: False
+#  vars:
+#    instance_type: t3.micro
+#    security_group_id: sg-03dc99c7c771a43f0
+#    image: ami-0b55b2bdf150da270
+#    region: us-east-1
+#  tasks:
+#    - name: Launch instance
+#      ec2:
+#        count: 1
+#        group_id: "{{ security_group_id }}"
+#        instance_type: "{{ instance_type }}"
+#        image: "{{ image }}"
+#        wait: true
+#        region: "{{ region }}"
+#        vpc_subnet_id: subnet-0d493668
+#        assign_public_ip: yes
+#        instance_tags:
+#          Name: Check-Instance
+#      register: ec2
+#
+#    - name: Add new instance to host group
+#      add_host:
+#        hostname: "{{ item.public_ip }}"
+#        groupname: launched
+#      loop: "{{ ec2.instances }}"
+#
+#    - name: Wait for SSH to come up
+#      delegate_to: "{{ item.public_ip }}"
+#      wait_for_connection:
+#        delay: 30
+#        timeout: 120
+#      loop: "{{ ec2.instances }}"
+#
+#    - name: Set Instance_Id variable to pass to next plan.
+#      set_fact:
+#        Instance_Id: "{{ ec2.instance_ids }}"
+#
+#- name: New play to execute role to test
+#  hosts: launched
+#  become: True
+#  gather_facts: True
+#  roles:
+#    - "{{ role_name }}"
+#  ignore_errors: True
+#
+#- name: Terminate instances
+#  hosts: localhost
+#  tasks:
+#    - name: Terminate instances that were previously launched
+#      ec2:
+#        state: 'absent'
+#        instance_ids: '{{ Instance_Id }}'
+#        region: us-east-1
+
+
+
+
 - name: Create a sandbox instance
   hosts: localhost
   gather_facts: False
@@ -7,50 +67,28 @@
     image: ami-0b55b2bdf150da270
     region: us-east-1
   tasks:
-    - name: Launch instance
-      ec2:
-        count: 1
-        group_id: "{{ security_group_id }}"
-        instance_type: "{{ instance_type }}"
-        image: "{{ image }}"
-        wait: true
-        region: "{{ region }}"
-        vpc_subnet_id: subnet-0d493668
-        assign_public_ip: yes
-        instance_tags:
+    - name: Create a new spot request
+      amazon.aws.ec2_spot_instance:
+        launch_specification:
+          count: 1
+          group_id: "{{ security_group_id }}"
+          instance_type: "{{ instance_type }}"
+          image: "{{ image }}"
+          wait: true
+          region: "{{ region }}"
+          subnet_id: subnet-0d493668
+        network_interfaces:
+          - associate_public_ip_address: True
+            delete_on_termination: True
+            device_index: 0
+        spot_type: persistent
+        spot_price: 0.02
+        tags:
           Name: Check-Instance
-      register: ec2
+        interruption: stop
+      register: spotEc2
 
-    - name: Add new instance to host group
-      add_host:
-        hostname: "{{ item.public_ip }}"
-        groupname: launched
-      loop: "{{ ec2.instances }}"
-
-    - name: Wait for SSH to come up
-      delegate_to: "{{ item.public_ip }}"
-      wait_for_connection:
-        delay: 30
-        timeout: 120
-      loop: "{{ ec2.instances }}"
-
-    - name: Set Instance_Id variable to pass to next plan.
-      set_fact:
-        Instance_Id: "{{ ec2.instance_ids }}"
-
-- name: New play to execute role to test
-  hosts: launched
-  become: True
-  gather_facts: True
-  roles:
-    - "{{ role_name }}"
-  ignore_errors: True
-
-- name: Terminate instances
-  hosts: localhost
-  tasks:
-    - name: Terminate instances that were previously launched
-      ec2:
-        state: 'absent'
-        instance_ids: '{{ Instance_Id }}'
-        region: "{{ region }}"
+    - name: Spot Request Termination
+      amazon.aws.ec2_spot_instance:
+        spot_instance_request_ids: "{{ spotEc2.spot_instance_request_id }}"
+        state: absent
