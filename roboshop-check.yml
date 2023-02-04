@@ -87,8 +87,8 @@
           Name: Check-Instance
         interruption: stop
 #      register: spotEc2
-
-    - name: Spot Request Termination
-      amazon.aws.ec2_spot_instance:
-        spot_instance_request_ids: "{{ spotEc2.spot_instance_request_id }}"
-        state: absent
+#
+#    - name: Spot Request Termination
+#      amazon.aws.ec2_spot_instance:
+#        spot_instance_request_ids: "{{ spotEc2.spot_instance_request_id }}"
+#        state: absent
