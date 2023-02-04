@@ -80,15 +80,11 @@
           image_id: "{{ image }}"
 #          wait: true
           subnet_id: subnet-0d493668
-#        network_interfaces:
-#          - associate_public_ip_address: True
-#            delete_on_termination: True
-#            device_index: 0
         tags:
           Name: Check-Instance
-#      register: spotEc2
-#
-#    - name: Spot Request Termination
-#      amazon.aws.ec2_spot_instance:
-#        spot_instance_request_ids: "{{ spotEc2.spot_instance_request_id }}"
-#        state: absent
+      register: spotEc2
+
+    - name: Spot Request Termination
+      amazon.aws.ec2_spot_instance:
+        spot_instance_request_ids: "{{ spotEc2.spot_instance_request_id }}"
+        state: absent
