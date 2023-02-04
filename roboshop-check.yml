@@ -71,21 +71,21 @@
       amazon.aws.ec2_spot_instance:
 #        count: 1
         region: "{{ region }}"
-#        spot_type: persistent
-#        spot_price: 0.02
-#        interruption: stop
+        spot_type: persistent
+        spot_price: 0.02
+        interruption: stop
         launch_specification:
-          group_id: "{{ security_group_id }}"
+          security_group_ids : "{{ security_group_id }}"
           instance_type: "{{ instance_type }}"
-          image: "{{ image }}"
+          image_id: "{{ image }}"
 #          wait: true
-#          subnet_id: subnet-0d493668
-#        network_interfaces:
-#          - associate_public_ip_address: True
-#            delete_on_termination: True
-#            device_index: 0
-#        tags:
-#          Name: Check-Instance
+          subnet_id: subnet-0d493668
+        network_interfaces:
+          - associate_public_ip_address: True
+            delete_on_termination: True
+            device_index: 0
+        tags:
+          Name: Check-Instance
 #      register: spotEc2
 #
 #    - name: Spot Request Termination
