@@ -77,11 +77,15 @@
           security_group_ids : "{{ security_group_id }}"
           instance_type: "{{ instance_type }}"
           image_id: "{{ image }}"
-#          wait: true
           subnet_id: subnet-0d493668
         tags:
           Name: Check-Instance
       register: ec2
+
+    - name: Get Ec2 information
+      ansible.builtin.debug:
+        msg: EC2 create time is {{ ec2.stdout.spot_instance_request_id }}
+
 
 #    - name: Get spot_instance info
 #      amazon.aws.ec2_spot_instance_info:
@@ -89,9 +93,6 @@
 #          - "{{spotEc2.spot_instance_request_id}}"
 #      register: ec2Info
 
-    - name: Get Ec2 information
-      ansible.builtin.debug:
-        msg: EC2 create time is {{ ec2.create_time }}
 
 
 
