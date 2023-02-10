@@ -81,7 +81,7 @@
           subnet_id: subnet-0d493668
         tags:
           Name: Check-Instance
-      register: spotEc2
+      register: ec2
 
 #    - name: Get spot_instance info
 #      amazon.aws.ec2_spot_instance_info:
@@ -91,7 +91,7 @@
 
     - name: Get Ec2 information
       ansible.builtin.debug:
-        msg: "{{ spotEc2.stdout }}"
+        msg: "{{ ec2.create_time }}"
 
 
 
