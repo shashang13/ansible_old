@@ -84,13 +84,13 @@
 
     - name: Get Ec2 information
       ansible.builtin.debug:
-        msg: EC2 create time is {{ ec2.stdout.spot_instance_request_id }}
+        msg: EC2 req id is {{ec2spot_request.spot_instance_request_id}}
 
 
 #    - name: Get spot_instance info
 #      amazon.aws.ec2_spot_instance_info:
 #        spot_instance_request_ids:
-#          - "{{spotEc2.spot_instance_request_id}}"
+#          - "{{spotEc2.spot_request.spot_instance_request_id}}"
 #      register: ec2Info
 
 

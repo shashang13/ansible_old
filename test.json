@@ -42,3 +42,47 @@
   },
   "type": "one-time"
 }
+
+
+
+ok: [localhost] => {
+  "msg": {
+    "changed": true,
+    "failed": false,
+    "spot_request": {
+      "create_time": "2023-02-10T08:22:52+00:00",
+      "instance_interruption_behavior": "stop",
+      "launch_specification": {
+        "ebs_optimized": false,
+        "image_id": "ami-0b55b2bdf150da270",
+        "instance_type": "t3.micro",
+        "monitoring": {
+          "enabled": false
+        },
+        "placement": {
+          "availability_zone": "us-east-1b"
+        },
+        "security_groups": [
+          {
+            "group_id": "sg-03dc99c7c771a43f0",
+            "group_name": "allow-all-sg"
+          }
+        ],
+        "subnet_id": "subnet-0d493668"
+      },
+      "product_description": "Linux/UNIX",
+      "spot_instance_request_id": "sir-m3gphsqh",
+      "spot_price": "0.020000",
+      "state": "open",
+      "status": {
+        "code": "pending-evaluation",
+        "message": "Your Spot request has been submitted for review, and is pending evaluation.",
+        "update_time": "2023-02-10T08:22:52+00:00"
+      },
+      "tags": {
+        "Name": "Check-Instance"
+      },
+      "type": "persistent"
+    }
+  }
+}
