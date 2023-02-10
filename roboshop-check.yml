@@ -95,7 +95,7 @@
 
     - name: Spot Instance info
       ansible.builtin.debug:
-        msg: "{{ec2Info.spot_request.create_time}}"
+        msg: "{{ec2Info.spot_request}}"
 
 #    - name: Tag spot_instance
 #      amazon.aws.ec2_tag:
