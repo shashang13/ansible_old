@@ -86,3 +86,54 @@ ok: [localhost] => {
     }
   }
 }
+
+
+ok: [localhost] => {
+  "msg": {
+    "changed": false,
+    "failed": false,
+    "spot_request": [
+      {
+        "create_time": "2023-02-10T10:48:52+00:00",
+        "instance_id": "i-0e8c10fec3211d383",
+        "instance_interruption_behavior": "stop",
+        "launch_specification": {
+          "ebs_optimized": false,
+          "image_id": "ami-0b55b2bdf150da270",
+          "instance_type": "t3.micro",
+          "monitoring": {
+            "enabled": false
+          },
+          "placement": {
+            "availability_zone": "us-east-1b"
+          },
+          "security_groups": [
+            {
+              "group_id": "sg-03dc99c7c771a43f0",
+              "group_name": "allow-all-sg"
+            }
+          ],
+          "subnet_id": "subnet-0d493668"
+        },
+        "launched_availability_zone": "us-east-1b",
+        "product_description": "Linux/UNIX",
+        "spot_instance_request_id": "sir-aqiekczg",
+        "spot_price": "0.020000",
+        "state": "active",
+        "status": {
+          "code": "fulfilled",
+          "message": "Your spot request is fulfilled.",
+          "update_time": "2023-02-10T10:48:54+00:00"
+        },
+        "tags": [
+          {
+            "key": "Name",
+            "value": "Check-Instance"
+          }
+        ],
+        "type": "persistent"
+      }
+    ]
+  }
+}
+
