@@ -95,14 +95,14 @@
 
     - name: Spot Instance info
       ansible.builtin.debug:
-        msg: "{{ec2Info.spot_request[0].launch_specification}}"
+        msg: "{{ec2Info.spot_request[0].instance_id}}"
 
-#    - name: Tag spot_instance
-#      amazon.aws.ec2_tag:
-#        resource: "{{ec2Info.spot_request.instance_id}}"
-#        state: present
-#        tags:
-#          Name: Check-Instance
+    - name: Tag spot_instance
+      amazon.aws.ec2_tag:
+        resource: "{{ec2Info.spot_request[0].instance_id}}"
+        state: present
+        tags:
+          Name: Check-Instance
 
 
 
