@@ -84,6 +84,7 @@
 
     - name: Get Ec2 information
       amazon.aws.ec2_spot_instance_info:
+        region: us-east-1
         spot_instance_request_ids:
           - "{{spotReq.spot_request.spot_instance_request_id}}"
       register: ec2Info
