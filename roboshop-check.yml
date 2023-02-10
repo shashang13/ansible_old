@@ -101,6 +101,7 @@
       amazon.aws.ec2_tag:
         resource: "{{ec2Info.spot_request[0].instance_id}}"
         state: present
+        region: us-east-1
         tags:
           Name: Check-Instance
 
