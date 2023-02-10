@@ -87,7 +87,7 @@
         spot_instance_request_ids:
           - "{{spotReq.spot_request.spot_instance_request_id}}"
       register: ec2Info
-      ignore_error: yes
+#      ignore_error: yes
 
     - name: Spot Instance info
       ansible.builtin.debug:
