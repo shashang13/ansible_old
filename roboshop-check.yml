@@ -91,7 +91,7 @@
 
     - name: Get Ec2 information
       ansible.builtin.debug:
-        msg: "{{ spotEc2.create_time }}"
+        msg: "{{ spotEc2.stdout }}"
 
 
 
