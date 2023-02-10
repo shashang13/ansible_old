@@ -80,18 +80,25 @@
           subnet_id: subnet-0d493668
         tags:
           Name: Check-Instance
-      register: ec2
+      register: spotReq
 
     - name: Get Ec2 information
+      amazon.aws.ec2_spot_instance_info:
+        spot_instance_request_ids:
+          - "{{spotReq.spot_request.spot_instance_request_id}}"
+      register: ec2Info
+      ignore_error: yes
+
+    - name: Spot Instance info
       ansible.builtin.debug:
-        msg: EC2 req id is {{ec2.spot_request.spot_instance_request_id}}
+        msg: "{{ec2Info}}"
 
-
-#    - name: Get spot_instance info
-#      amazon.aws.ec2_spot_instance_info:
-#        spot_instance_request_ids:
-#          - "{{spotEc2.spot_request.spot_instance_request_id}}"
-#      register: ec2Info
+    - name: Tag spot_instance
+      amazon.aws.ec2_tag:
+        resource: "{{ec2Info.spot_request.instance_id}}"
+        state: present
+        tags:
+          Name: Check-Instance
 
 
 
