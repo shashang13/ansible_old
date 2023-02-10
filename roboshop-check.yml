@@ -83,15 +83,15 @@
           Name: Check-Instance
       register: spotEc2
 
-    - name: Get spot_instance info
-      amazon.aws.ec2_spot_instance_info:
-        spot_instance_request_ids:
-          - "{{spotEc2.spot_instance_request_id}}"
-      register: ec2Info
+#    - name: Get spot_instance info
+#      amazon.aws.ec2_spot_instance_info:
+#        spot_instance_request_ids:
+#          - "{{spotEc2.spot_instance_request_id}}"
+#      register: ec2Info
 
     - name: Get Ec2 information
       ansible.builtin.debug:
-        msg: "{{ ec2Info }}"
+        msg: "{{ spotEc2 }}"
 
 
 
