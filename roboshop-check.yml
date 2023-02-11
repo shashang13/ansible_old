@@ -71,7 +71,7 @@
       amazon.aws.ec2_spot_instance:
         region: "{{ region }}"
         spot_type: persistent
-        spot_price: 0.02
+        spot_price: 0.01
         interruption: stop
         launch_specification:
           security_group_ids : "{{ security_group_id }}"
@@ -83,25 +83,21 @@
       register: spotReq
 
     - name: Wait few seconds
-      ansible.builtin.shell: sleep 20
+      ansible.builtin.shell: sleep 15
 
     - name: Get Ec2 information
       amazon.aws.ec2_spot_instance_info:
-        region: us-east-1
+        region: "{{ region }}"
         spot_instance_request_ids:
           - "{{spotReq.spot_request.spot_instance_request_id}}"
       register: ec2Info
-#      ignore_error: yes
-
-    - name: Spot Instance info
-      ansible.builtin.debug:
-        msg: "{{ec2Info.spot_request[0].instance_id}}"
+#      ignore_errors: yes
 
     - name: Tag spot_instance
       amazon.aws.ec2_tag:
         resource: "{{ec2Info.spot_request[0].instance_id}}"
         state: present
-        region: us-east-1
+        region: "{{ region }}"
         tags:
           Name: Check-Instance
 
