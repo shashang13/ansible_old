@@ -71,7 +71,7 @@
       amazon.aws.ec2_spot_instance:
         region: "{{ region }}"
         spot_type: persistent
-        spot_price: 0.01
+        spot_price: 0.0021
         interruption: stop
         launch_specification:
           security_group_ids : "{{ security_group_id }}"
