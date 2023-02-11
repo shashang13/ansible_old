@@ -106,5 +106,5 @@
         - name: Spot Request Termination
           amazon.aws.ec2_spot_instance:
             region: "{{ region }}"
-            spot_instance_request_ids: "{{ spotReq.spot_request.spot_instance_request_id }}"
+            spot_instance_request_ids: [{{ spotReq.spot_request.spot_instance_request_id }}]
             state: absent
