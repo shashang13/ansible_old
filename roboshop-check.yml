@@ -51,7 +51,7 @@
   tasks:
     - name: set the facts per host
       set_fact:
-        INSTANCE_ID: "{{hostvars['localhost']['Instance_Id']}}"
+        INSTANCE_ID: "{{ hostvars['localhost']['Instance_Id'] }}"
 
     - name: New play to execute role to test
       block:
@@ -59,7 +59,7 @@
 #          ansible.builtin.import_role:
 #            name: "{{ role_name }}"
           ansible.builtin.debug:
-            msg: test role imported
+            msg: "{{ INSTANCE_ID }}"
 #         ignore_errors: True
 
       always:
