@@ -60,6 +60,5 @@
         - name: Terminate instances that were previously launched
           amazon.aws.ec2_instance:
             state: absent
-            instance_ids: "{{ item.instance_id }}"
+            instance_ids: "{{ Instance_Id }}"
             region: us-east-1
-          loop: "{{ ec2.instances }}"
