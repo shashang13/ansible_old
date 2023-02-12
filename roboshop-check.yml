@@ -47,7 +47,7 @@
 - name: Check for registered variable.
   hosts: launched
   become: true
-  gather_facts: true
+  gather_facts: false
   tasks:
     - name: Validating Registered value
       ansible.builtin.debug:
