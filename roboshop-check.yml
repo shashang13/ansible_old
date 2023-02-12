@@ -16,7 +16,8 @@
         wait: true
         region: "{{ region }}"
         vpc_subnet_id: subnet-0d493668
-        assign_public_ip: yes
+        network:
+          assign_public_ip: yes
         tags:
           Name: Check-Instance
       register: ec2
