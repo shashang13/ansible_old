@@ -1,43 +1,47 @@
-#- name: Create a sandbox instance
-#  hosts: localhost
-#  gather_facts: False
-#  vars:
-#    instance_type: t3.micro
-#    security_group_id: sg-03dc99c7c771a43f0
-#    image: ami-0b55b2bdf150da270
-#    region: us-east-1
-#  tasks:
-#    - name: Launch instance
-#      ec2:
-#        count: 1
-#        group_id: "{{ security_group_id }}"
-#        instance_type: "{{ instance_type }}"
-#        image: "{{ image }}"
-#        wait: true
-#        region: "{{ region }}"
-#        vpc_subnet_id: subnet-0d493668
-#        assign_public_ip: yes
-#        instance_tags:
-#          Name: Check-Instance
-#      register: ec2
-#
-#    - name: Add new instance to host group
-#      add_host:
-#        hostname: "{{ item.public_ip }}"
-#        groupname: launched
-#      loop: "{{ ec2.instances }}"
-#
-#    - name: Wait for SSH to come up
+- name: Create a sandbox instance
+  hosts: localhost
+  gather_facts: False
+  vars:
+    instance_type: t3.micro
+    security_group_id: sg-03dc99c7c771a43f0
+    image: ami-0b55b2bdf150da270
+    region: us-east-1
+  tasks:
+    - name: Launch instance
+      ec2:
+        count: 2
+        group_id: "{{ security_group_id }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ image }}"
+        wait: true
+        region: "{{ region }}"
+        vpc_subnet_id: subnet-0d493668
+        assign_public_ip: yes
+        instance_tags:
+          Name: Check-Instance
+      register: ec2
+
+    - name: Get EC2.INSTANCES information
+      debug:
+        msg: "{{ ec2.instances }}"
+
+    - name: Add new instance to host group
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: launched
+      loop: "{{ ec2.instances }}"
+
+    - name: Wait for SSH to come up
 #      delegate_to: "{{ item.public_ip }}"
-#      wait_for_connection:
-#        delay: 30
-#        timeout: 120
-#      loop: "{{ ec2.instances }}"
-#
+      wait_for_connection:
+        delay: 20
+        timeout: 60
+      loop: "{{ ec2.instances }}"
+
 #    - name: Set Instance_Id variable to pass to next plan.
 #      set_fact:
 #        Instance_Id: "{{ ec2.instance_ids }}"
-#
+
 #- name: New play to execute role to test
 #  hosts: launched
 #  become: True
@@ -45,7 +49,7 @@
 #  roles:
 #    - "{{ role_name }}"
 #  ignore_errors: True
-#
+
 #- name: Terminate instances
 #  hosts: localhost
 #  tasks:
@@ -57,54 +61,55 @@
 
 
 
-
-- name: Create a sandbox instance
-  hosts: localhost
-  gather_facts: False
-  vars:
-    instance_type: t3.micro
-    security_group_id: sg-03dc99c7c771a43f0
-    image: ami-0b55b2bdf150da270
-    region: us-east-1
-  tasks:
-    - name: Setup an EC2 instance
-      block:
-        - name: Create a new spot request
-          amazon.aws.ec2_spot_instance:
-            region: "{{ region }}"
-            spot_type: persistent
-            spot_price: 0.0031
-            interruption: stop
-            launch_specification:
-              security_group_ids : "{{ security_group_id }}"
-              instance_type: "{{ instance_type }}"
-              image_id: "{{ image }}"
-              subnet_id: subnet-0d493668
-            tags:
-              Name: Check-Instance
-          register: spotReq
-        - name: Wait few seconds
-          ansible.builtin.shell: sleep 15
-        - name: Get Ec2 information
-          amazon.aws.ec2_spot_instance_info:
-            region: "{{ region }}"
-            spot_instance_request_ids:
-              - "{{spotReq.spot_request.spot_instance_request_id}}"
-          register: ec2Info
-    #      ignore_errors: yes
-        - name: Tag spot_instance
-          amazon.aws.ec2_tag:
-            resource: "{{ec2Info.spot_request[0].instance_id}}"
-            state: present
-            region: "{{ region }}"
-            tags:
-              Name: Check-Instance
-        - name: Wait 30 seconds
-          ansible.builtin.shell: sleep 30
-
-      always:
-        - name: Spot Request Termination
-          amazon.aws.ec2_spot_instance:
-            region: "{{ region }}"
-            spot_instance_request_ids: ["{{ spotReq.spot_request.spot_instance_request_id }}"]
-            state: absent
+#- name: Create a sandbox instance
+#  hosts: localhost
+#  gather_facts: False
+#  vars:
+#    instance_type: t3.micro
+#    security_group_id: sg-03dc99c7c771a43f0
+#    image: ami-0b55b2bdf150da270
+#    region: us-east-1
+#  tasks:
+#    - name: Setup an EC2 instance
+#      block:
+#        - name: Create a new spot request
+#          amazon.aws.ec2_spot_instance:
+#            region: "{{ region }}"
+#            spot_type: persistent
+#            spot_price: 0.0031
+#            interruption: stop
+#            launch_specification:
+#              security_group_ids : "{{ security_group_id }}"
+#              instance_type: "{{ instance_type }}"
+#              image_id: "{{ image }}"
+#              subnet_id: subnet-0d493668
+#            tags:
+#              Name: Check-Instance
+#          register: spotReq
+#        - name: Wait few seconds
+#          ansible.builtin.wait_for_connection:
+#            delay: 15
+#            timeout: 60
+#        - name: Get Ec2 information
+#          amazon.aws.ec2_spot_instance_info:
+#            region: "{{ region }}"
+#            spot_instance_request_ids:
+#              - "{{spotReq.spot_request.spot_instance_request_id}}"
+#          register: ec2Info
+#    #      ignore_errors: yes
+#        - name: Tag spot_instance
+#          amazon.aws.ec2_tag:
+#            resource: "{{ec2Info.spot_request[0].instance_id}}"
+#            state: present
+#            region: "{{ region }}"
+#            tags:
+#              Name: Check-Instance
+#        - name: Wait 30 seconds
+#          ansible.builtin.shell: sleep 30
+#
+#      always:
+#        - name: Spot Request Termination
+#          amazon.aws.ec2_spot_instance:
+#            region: "{{ region }}"
+#            spot_instance_request_ids: ["{{ spotReq.spot_request.spot_instance_request_id }}"]
+#            state: absent
