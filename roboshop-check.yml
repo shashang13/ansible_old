@@ -38,7 +38,7 @@
 #      delegate_to: "{{ item.public_ip_address }}"
       wait_for_connection:
         delay: 20
-        timeout: 60
+        timeout: 40
       loop: "{{ ec2.instances }}"
 
 #    - name: Set Instance_Id variable to pass to next plan.
