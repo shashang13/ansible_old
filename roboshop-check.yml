@@ -39,79 +39,25 @@
         delay: 20
         timeout: 40
 
-#    - name: Set Instance_Id variable to pass to next plan.
-#      set_fact:
-#        Instance_Id: "{{ ec2.instance_id }}"
+    - name: Set Instance_Id variable to pass to next plan.
+      set_fact:
+        Instance_Id: "{{ ec2.instance_id }}"
 
-#- name: New play to execute role to test
-#  hosts: launched
-#  become: True
-#  gather_facts: True
-#  roles:
-#    - "{{ role_name }}"
-#  ignore_errors: True
-
-- name: Terminate instances
-  hosts: localhost
+- name: Execute role fail but task to continue.
+  hosts: launched
+  become: True
   tasks:
-    - name: Terminate instances that were previously launched
-      amazon.aws.ec2_instance:
-        state: absent
-        instance_ids: "{{ item.instance_id }}"
-        region: us-east-1
-      loop: "{{ ec2.instances }}"
+    block:
+      - name: New play to execute role to test
+        gather_facts: True
+        roles:
+          - "{{ role_name }}"
+#        ignore_errors: True
 
-
-
-#- name: Create a sandbox instance
-#  hosts: localhost
-#  gather_facts: False
-#  vars:
-#    instance_type: t3.micro
-#    security_group_id: sg-03dc99c7c771a43f0
-#    image: ami-0b55b2bdf150da270
-#    region: us-east-1
-#  tasks:
-#    - name: Setup an EC2 instance
-#      block:
-#        - name: Create a new spot request
-#          amazon.aws.ec2_spot_instance:
-#            region: "{{ region }}"
-#            spot_type: persistent
-#            spot_price: 0.0031
-#            interruption: stop
-#            launch_specification:
-#              security_group_ids : "{{ security_group_id }}"
-#              instance_type: "{{ instance_type }}"
-#              image_id: "{{ image }}"
-#              subnet_id: subnet-0d493668
-#            tags:
-#              Name: Check-Instance
-#          register: spotReq
-#        - name: Wait few seconds
-#          ansible.builtin.wait_for_connection:
-#            delay: 15
-#            timeout: 60
-#        - name: Get Ec2 information
-#          amazon.aws.ec2_spot_instance_info:
-#            region: "{{ region }}"
-#            spot_instance_request_ids:
-#              - "{{spotReq.spot_request.spot_instance_request_id}}"
-#          register: ec2Info
-#    #      ignore_errors: yes
-#        - name: Tag spot_instance
-#          amazon.aws.ec2_tag:
-#            resource: "{{ec2Info.spot_request[0].instance_id}}"
-#            state: present
-#            region: "{{ region }}"
-#            tags:
-#              Name: Check-Instance
-#        - name: Wait 30 seconds
-#          ansible.builtin.shell: sleep 30
-#
-#      always:
-#        - name: Spot Request Termination
-#          amazon.aws.ec2_spot_instance:
-#            region: "{{ region }}"
-#            spot_instance_request_ids: ["{{ spotReq.spot_request.spot_instance_request_id }}"]
-#            state: absent
+    always:
+      - name: Terminate instances that were previously launched
+        amazon.aws.ec2_instance:
+          state: absent
+          instance_ids: "{{ item.instance_id }}"
+          region: us-east-1
+        loop: "{{ ec2.instances }}"
