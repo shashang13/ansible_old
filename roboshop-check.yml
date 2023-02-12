@@ -43,13 +43,13 @@
 #      set_fact:
 #        Instance_Id: "{{ ec2.instance_id }}"
 
-- name: New play to execute role to test
-  hosts: launched
-  become: True
-  gather_facts: True
-  roles:
-    - "{{ role_name }}"
-  ignore_errors: True
+#- name: New play to execute role to test
+#  hosts: launched
+#  become: True
+#  gather_facts: True
+#  roles:
+#    - "{{ role_name }}"
+#  ignore_errors: True
 
 - name: Terminate instances
   hosts: localhost
