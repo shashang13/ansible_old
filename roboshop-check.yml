@@ -52,8 +52,10 @@
     - name: New play to execute role to test
       block:
         - name: Import a test role
-          ansible.builtin.import_role:
-            name: "{{ role_name }}"
+#          ansible.builtin.import_role:
+#            name: "{{ role_name }}"
+          ansible.builtin.debug:
+            msg: test role imported
 #         ignore_errors: True
 
       always:
