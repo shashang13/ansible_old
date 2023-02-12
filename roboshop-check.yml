@@ -41,7 +41,7 @@
 
     - name: Set Instance_Id variable to pass to next plan.
       set_fact:
-        Instance_Id: "{{ item.instance_ids }}"
+        Instance_Id: "{{ ec2.instance_ids }}"
 #      loop: "{{ ec2.instances }}"
 
 - name: Execute role fail but task to continue.
