@@ -59,7 +59,7 @@
         state: absent
         instance_ids: "{{ item.instance_id }}"
         region: us-east-1
-        loop: "{{ ec2.instances }}"
+      loop: "{{ ec2.instances }}"
 
 
 
