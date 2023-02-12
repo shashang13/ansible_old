@@ -52,7 +52,7 @@
       block:
         - name: Import a test role
           ansible.builtin.import_roles:
-            - "{{ role_name }}"
+            name: "{{ role_name }}"
 #         ignore_errors: True
 
       always:
