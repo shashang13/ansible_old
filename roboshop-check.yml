@@ -56,7 +56,7 @@
   hosts: localhost
   tasks:
     - name: Terminate instances that were previously launched
-      ec2:
+      amazon.aws.ec2_instance:
         state: 'absent'
         instance_ids: '{{ ec2.instance_id }}'
         region: us-east-1
