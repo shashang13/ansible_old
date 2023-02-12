@@ -46,17 +46,18 @@
 - name: Execute role fail but task to continue.
   hosts: launched
   become: True
+  gather_facts: Yes
   tasks:
-    block:
-      - name: New play to execute role to test
+    - name: New play to execute role to test
+      block:
         ansible.builtin.import_roles:
           - "{{ role_name }}"
 #        ignore_errors: True
 
-    always:
-      - name: Terminate instances that were previously launched
-        amazon.aws.ec2_instance:
-          state: absent
-          instance_ids: "{{ item.instance_id }}"
-          region: us-east-1
-        loop: "{{ ec2.instances }}"
+      always:
+        - name: Terminate instances that were previously launched
+          amazon.aws.ec2_instance:
+            state: absent
+            instance_ids: "{{ item.instance_id }}"
+            region: us-east-1
+          loop: "{{ ec2.instances }}"
