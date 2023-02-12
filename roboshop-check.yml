@@ -24,7 +24,7 @@
 
     - name: Get EC2.INSTANCES information
       debug:
-        msg: "{{ ec2.instances }}"
+        msg: "{{ ec2 }}"
 
     - name: Add new instance to host group
       add_host:

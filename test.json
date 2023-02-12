@@ -90,3 +90,256 @@ ok: [localhost] => {
   }
 }
 
+
+  ok: [localhost] => {
+"msg": [
+{
+"ami_launch_index": 1,
+"architecture": "x86_64",
+"block_device_mappings": [
+{
+"device_name": "/dev/sda1",
+"ebs": {
+"attach_time": "2023-02-12T12:15:22+00:00",
+"delete_on_termination": true,
+"status": "attaching",
+"volume_id": "vol-06ef82fc242340790"
+}
+}
+],
+"capacity_reservation_specification": {
+"capacity_reservation_preference": "open"
+},
+"client_token": "5997cf78449640cf8817c696e2509d35",
+"cpu_options": {
+"core_count": 1,
+"threads_per_core": 2
+},
+"ebs_optimized": false,
+"ena_support": true,
+"enclave_options": {
+"enabled": false
+},
+"hibernation_options": {
+"configured": false
+},
+"hypervisor": "xen",
+"image_id": "ami-0b55b2bdf150da270",
+"instance_id": "i-0747133185a8d6b98",
+"instance_type": "t3.micro",
+"launch_time": "2023-02-12T12:15:22+00:00",
+"maintenance_options": {
+"auto_recovery": "default"
+},
+"metadata_options": {
+"http_endpoint": "enabled",
+"http_protocol_ipv6": "disabled",
+"http_put_response_hop_limit": 1,
+"http_tokens": "optional",
+"instance_metadata_tags": "disabled",
+"state": "pending"
+},
+"monitoring": {
+"state": "disabled"
+},
+"network_interfaces": [
+{
+"attachment": {
+"attach_time": "2023-02-12T12:15:22+00:00",
+"attachment_id": "eni-attach-08f3bef77bd137ac6",
+"delete_on_termination": true,
+"device_index": 0,
+"network_card_index": 0,
+"status": "attaching"
+},
+"description": "",
+"groups": [
+{
+"group_id": "sg-03dc99c7c771a43f0",
+"group_name": "allow-all-sg"
+}
+],
+"interface_type": "interface",
+"ipv6_addresses": [],
+"mac_address": "02:8d:33:1c:22:c5",
+"network_interface_id": "eni-09dfebc082520c25b",
+"owner_id": "814828966359",
+"private_dns_name": "ip-172-31-71-36.ec2.internal",
+"private_ip_address": "172.31.71.36",
+"private_ip_addresses": [
+{
+"primary": true,
+"private_dns_name": "ip-172-31-71-36.ec2.internal",
+"private_ip_address": "172.31.71.36"
+}
+],
+"source_dest_check": true,
+"status": "in-use",
+"subnet_id": "subnet-0d493668",
+"vpc_id": "vpc-f097c595"
+}
+],
+"placement": {
+"availability_zone": "us-east-1b",
+"group_name": "",
+"tenancy": "default"
+},
+"platform_details": "Linux/UNIX",
+"private_dns_name": "ip-172-31-71-36.ec2.internal",
+"private_dns_name_options": {
+"enable_resource_name_dns_a_record": false,
+"enable_resource_name_dns_aaaa_record": false,
+"hostname_type": "ip-name"
+},
+"private_ip_address": "172.31.71.36",
+"product_codes": [],
+"public_dns_name": "",
+"root_device_name": "/dev/sda1",
+"root_device_type": "ebs",
+"security_groups": [
+{
+"group_id": "sg-03dc99c7c771a43f0",
+"group_name": "allow-all-sg"
+}
+],
+"source_dest_check": true,
+"state": {
+"code": 0,
+"name": "pending"
+},
+"state_transition_reason": "",
+"subnet_id": "subnet-0d493668",
+"tags": {
+"Name": "Check-Instance"
+},
+"usage_operation": "RunInstances",
+"usage_operation_update_time": "2023-02-12T12:15:22+00:00",
+"virtualization_type": "hvm",
+"vpc_id": "vpc-f097c595"
+},
+{
+"ami_launch_index": 0,
+"architecture": "x86_64",
+"block_device_mappings": [
+{
+"device_name": "/dev/sda1",
+"ebs": {
+"attach_time": "2023-02-12T12:15:22+00:00",
+"delete_on_termination": true,
+"status": "attaching",
+"volume_id": "vol-016d665f2e1520e19"
+}
+}
+],
+"capacity_reservation_specification": {
+"capacity_reservation_preference": "open"
+},
+"client_token": "5997cf78449640cf8817c696e2509d35",
+"cpu_options": {
+"core_count": 1,
+"threads_per_core": 2
+},
+"ebs_optimized": false,
+"ena_support": true,
+"enclave_options": {
+"enabled": false
+},
+"hibernation_options": {
+"configured": false
+},
+"hypervisor": "xen",
+"image_id": "ami-0b55b2bdf150da270",
+"instance_id": "i-057f3be3211f82141",
+"instance_type": "t3.micro",
+"launch_time": "2023-02-12T12:15:22+00:00",
+"maintenance_options": {
+"auto_recovery": "default"
+},
+"metadata_options": {
+"http_endpoint": "enabled",
+"http_protocol_ipv6": "disabled",
+"http_put_response_hop_limit": 1,
+"http_tokens": "optional",
+"instance_metadata_tags": "disabled",
+"state": "pending"
+},
+"monitoring": {
+"state": "disabled"
+},
+"network_interfaces": [
+{
+"attachment": {
+"attach_time": "2023-02-12T12:15:22+00:00",
+"attachment_id": "eni-attach-004ed2a1700407bca",
+"delete_on_termination": true,
+"device_index": 0,
+"network_card_index": 0,
+"status": "attaching"
+},
+"description": "",
+"groups": [
+{
+"group_id": "sg-03dc99c7c771a43f0",
+"group_name": "allow-all-sg"
+}
+],
+"interface_type": "interface",
+"ipv6_addresses": [],
+"mac_address": "02:89:d8:a4:41:95",
+"network_interface_id": "eni-0efc27608f2da3aa8",
+"owner_id": "814828966359",
+"private_dns_name": "ip-172-31-78-84.ec2.internal",
+"private_ip_address": "172.31.78.84",
+"private_ip_addresses": [
+{
+"primary": true,
+"private_dns_name": "ip-172-31-78-84.ec2.internal",
+"private_ip_address": "172.31.78.84"
+}
+],
+"source_dest_check": true,
+"status": "in-use",
+"subnet_id": "subnet-0d493668",
+"vpc_id": "vpc-f097c595"
+}
+],
+"placement": {
+"availability_zone": "us-east-1b",
+"group_name": "",
+"tenancy": "default"
+},
+"platform_details": "Linux/UNIX",
+"private_dns_name": "ip-172-31-78-84.ec2.internal",
+"private_dns_name_options": {
+"enable_resource_name_dns_a_record": false,
+"enable_resource_name_dns_aaaa_record": false,
+"hostname_type": "ip-name"
+},
+"private_ip_address": "172.31.78.84",
+"product_codes": [],
+"public_dns_name": "",
+"root_device_name": "/dev/sda1",
+"root_device_type": "ebs",
+"security_groups": [
+{
+"group_id": "sg-03dc99c7c771a43f0",
+"group_name": "allow-all-sg"
+}
+],
+"source_dest_check": true,
+"state": {
+"code": 0,
+"name": "pending"
+},
+"state_transition_reason": "",
+"subnet_id": "subnet-0d493668",
+"tags": {
+"Name": "Check-Instance"
+},
+"usage_operation": "RunInstances",
+"usage_operation_update_time": "2023-02-12T12:15:22+00:00",
+"virtualization_type": "hvm",
+"vpc_id": "vpc-f097c595"
+}
+]
+}
