@@ -49,8 +49,7 @@
   tasks:
     block:
       - name: New play to execute role to test
-        gather_facts: True
-        roles:
+        ansible.builtin.import_roles:
           - "{{ role_name }}"
 #        ignore_errors: True
 
