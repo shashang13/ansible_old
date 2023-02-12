@@ -9,7 +9,7 @@
   tasks:
     - name: Launch instance
       amazon.aws.ec2_instance:
-        count: 2
+        count: 1
         security_group : "{{ security_group_id }}"
         instance_type: "{{ instance_type }}"
         image:
@@ -45,23 +45,23 @@
 #        Instance_Id: "{{ ec2.instance_id }}"
 
 - name: Check for registered variable.
-  host: launched
-  become: true
-  gather_facts: false
-  tasks:
-    - name: Validating Registerd value
-      debug:
-        msg: "{{ ec2.instance_id }}"
-
-
-
-- name: New play to execute role to test
   hosts: launched
-  become: True
-  gather_facts: True
-  roles:
-    - "{{ role_name }}"
-  ignore_errors: True
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Validating Registered value
+      ansible.builtin.debug:
+        msg: "{{ ec2.instance_id }}"
+#
+#
+#
+#- name: New play to execute role to test
+#  hosts: launched
+#  become: True
+#  gather_facts: True
+#  roles:
+#    - "{{ role_name }}"
+#  ignore_errors: True
 
 #- name: Terminate instances
 #  hosts: localhost
