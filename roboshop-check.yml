@@ -42,7 +42,6 @@
     - name: Set Instance_Id variable to pass to next plan.
       set_fact:
         Instance_Id: "{{ ec2.instance_ids }}"
-#      loop: "{{ ec2.instances }}"
 
 - name: Execute role fail but task to continue.
   hosts: launched
@@ -56,10 +55,8 @@
     - name: New play to execute role to test
       block:
         - name: Import a test role
-#          ansible.builtin.import_role:
-#            name: "{{ role_name }}"
-          ansible.builtin.debug:
-            msg: "{{ INSTANCE_ID }}"
+          ansible.builtin.import_role:
+            name: "{{ role_name }}"
 #         ignore_errors: True
 
       always:
