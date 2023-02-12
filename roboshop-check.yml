@@ -30,15 +30,14 @@
 
     - name: Add new instance to host group
       add_host:
-        hostname: "{{ item.public_ip_address }}"
-        groupname: launched
+        name: "{{ item.public_ip_address }}"
+        groups: launched
       loop: "{{ ec2.instances }}"
 
     - name: Wait for SSH to come up
       wait_for_connection:
         delay: 20
         timeout: 40
-      loop: "{{ ec2.instances }}"
 
 #    - name: Set Instance_Id variable to pass to next plan.
 #      set_fact:
@@ -57,8 +56,8 @@
   tasks:
     - name: Terminate instances that were previously launched
       amazon.aws.ec2_instance:
-        state: 'absent'
-        instance_ids: '{{ ec2.instance_id }}'
+        state: absent
+        instance_ids: "{{ ec2.instance_id }}"
         region: us-east-1
 
 
