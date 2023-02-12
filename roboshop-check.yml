@@ -8,7 +8,7 @@
     region: us-east-1
   tasks:
     - name: Launch instance
-      amazon.aws.ec2:
+      ec2:
         count: 2
         group_id: "{{ security_group_id }}"
         instance_type: "{{ instance_type }}"
@@ -32,7 +32,7 @@
       loop: "{{ ec2.instances }}"
 
     - name: Wait for SSH to come up
-#      delegate_to: "{{ item.public_ip }}"
+      delegate_to: "{{ item.public_ip }}"
       wait_for_connection:
         delay: 20
         timeout: 60
