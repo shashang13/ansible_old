@@ -9,13 +9,15 @@
   tasks:
     - name: Launch instance
       amazon.aws.ec2_instance:
-        count: 2
+        count: 1
         security_group : "{{ security_group_id }}"
         instance_type: "{{ instance_type }}"
-        image_id: "{{ image }}"
+        image:
+          id: "{{ image }}"
         wait: true
         region: "{{ region }}"
         vpc_subnet_id: subnet-0d493668
+        state: running
         network:
           assign_public_ip: yes
         tags:
