@@ -50,7 +50,7 @@
   tasks:
     - name: New play to execute role to test
       block:
-        - name: Import {{ role_name }} role
+        - name: Import "{{ role_name }}" role
           ansible.builtin.import_roles:
             - "{{ role_name }}"
 #         ignore_errors: True
