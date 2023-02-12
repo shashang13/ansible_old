@@ -9,7 +9,7 @@
   tasks:
     - name: Launch instance
       amazon.aws.ec2_instance:
-        count: 1
+        count: 2
         security_group : "{{ security_group_id }}"
         instance_type: "{{ instance_type }}"
         image:
