@@ -2,6 +2,9 @@ pipeline {
   agent {
     label 'Group1'
   }
+  options {
+          ansiColor('xterm')
+      }
 
   stages {
     stage ('Roboshop Dry Run') {
