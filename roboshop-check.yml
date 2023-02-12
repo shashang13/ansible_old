@@ -64,6 +64,7 @@
 
       always:
         - name: Terminate instances that were previously launched
+          delegate_to: 127.0.0.1
           amazon.aws.ec2_instance:
             state: absent
             instance_ids: "{{ INSTANCE_ID }}"
