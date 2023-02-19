@@ -5,9 +5,9 @@ pipeline {
   options {
     ansiColor('xterm')
   }
-  environment {
-    SSH = credentials ('SSH')
-  }
+//   environment {
+//     SSH = credentials ('SSH')
+//   }
 
 
   stages {
