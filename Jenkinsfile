@@ -21,22 +21,22 @@ pipeline {
       }
     }
 
-//     stage ('PR') {
-//       steps {
-//         sh '''
-//           env
-//           echo "This is a PR"
-//         '''
-//       }
-//     }
-//
-//     stage ('Main Branch') {
-//       steps {
-//         sh '''
-//           env
-//           echo "This is a Main branch"
-//         '''
-//       }
-//     }
+    stage ('PR') {
+      steps {
+        sh '''
+          env
+          echo "This is a PR"
+        '''
+      }
+    }
+
+    stage ('Main Branch') {
+      steps {
+        sh '''
+          env
+          echo "This is a Main branch"
+        '''
+      }
+    }
   }
 }
