@@ -24,8 +24,7 @@ pipeline {
       when { branch pattern: "PR.*", comparator: "REGEXP"}
       steps {
         sh '''
-          echo "This is PR"
-          env
+          echo "ansible-playbook roboshop-check.yml -e ansible_user=${SSH_USR} -e ansible_password=${SSH_PSW} -e role_name=frontend -e ENV=sandbox"
         '''
       }
     }
