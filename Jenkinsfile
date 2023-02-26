@@ -11,18 +11,16 @@ pipeline {
 
 
   stages {
-    stage ('Feature branch') {
+    stage ('Validate Code quality') {
       when { branch pattern: "Rob.*", comparator: "REGEXP"}
       steps {
         sh '''
-          #ansible-playbook roboshop-check.yml -e ansible_user=${SSH_USR} -e ansible_password=${SSH_PSW} -e role_name=frontend -e ENV=sandbox
-          echo "This is a feature branch"
-          env
+          echo "Execute Ansible lint check "
         '''
       }
     }
 
-    stage ('PR') {
+    stage ('Sandbox Env Validation') {
       when { branch pattern: "PR.*", comparator: "REGEXP"}
       steps {
         sh '''
