@@ -15,7 +15,7 @@ pipeline {
       steps {
         sh '''
           #ansible-playbook roboshop-check.yml -e ansible_user=${SSH_USR} -e ansible_password=${SSH_PSW} -e role_name=frontend -e ENV=sandbox
-          echo -e "This is a feature branch"
+          echo "This is a feature branch"
           env
         '''
       }
@@ -24,7 +24,7 @@ pipeline {
     stage ('PR') {
       steps {
         sh '''
-          echo -e "\e[35mThis is PR\e[0m"
+          echo "This is PR"
           env
         '''
       }
@@ -34,7 +34,7 @@ pipeline {
       when { branch 'main' }
       steps {
         sh '''
-          echo -e "\e[35mThis is a Main branch\e[0m"
+          echo "This is a Main branch"
           env
         '''
       }
