@@ -13,21 +13,21 @@ pipeline {
     stage {
       steps {
         sh 'env'
-        echo "This is a feature branch"
+        sh 'echo This is a feature branch'
       }
     }
 
     stage {
       steps {
         sh 'env'
-        echo "This is a PR"
+        sh 'echo This is a PR'
       }
     }
 
     stage {
       steps {
         sh 'env'
-        echo "This is Main branch"
+        sh 'echo This is Main branch'
       }
     }
 //     stage ('Roboshop Dry Run') {
