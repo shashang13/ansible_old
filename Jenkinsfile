@@ -10,21 +10,21 @@ pipeline {
   }
 
   stages {
-    stage {
+    stage ('Feature branch') {
       steps {
         sh 'env'
         sh 'echo This is a feature branch'
       }
     }
 
-    stage {
+    stage ('PR') {
       steps {
         sh 'env'
         sh 'echo This is a PR'
       }
     }
 
-    stage {
+    stage ('Main Branch') {
       steps {
         sh 'env'
         sh 'echo This is Main branch'
