@@ -10,13 +10,33 @@ pipeline {
   }
 
   stages {
-    stage ('Roboshop Dry Run') {
+    stage {
       steps {
-        sh '''
-          env
-          #ansible-playbook roboshop-check.yaml -e role_name=frontend -e ansible_user=${SSH_USR} -e ansible_password=${SSH_PSW} -e ENV=sandbox
-        '''
+        sh 'env'
+        echo "This is a feature branch"
       }
     }
+
+    stage {
+      steps {
+        sh 'env'
+        echo "This is a PR"
+      }
+    }
+
+    stage {
+      steps {
+        sh 'env'
+        echo "This is Main branch"
+      }
+    }
+//     stage ('Roboshop Dry Run') {
+//       steps {
+//         sh '''
+//           env
+//           #ansible-playbook roboshop-check.yaml -e role_name=frontend -e ansible_user=${SSH_USR} -e ansible_password=${SSH_PSW} -e ENV=sandbox
+//         '''
+//       }
+//     }
   }
 }
