@@ -8,80 +8,61 @@
     region: us-east-1
   tasks:
     - name: Launch instance
-      ec2:
+      amazon.aws.ec2_instance:
         count: 1
-        group_id: "{{ security_group_id }}"
+        security_group : "{{ security_group_id }}"
         instance_type: "{{ instance_type }}"
-        image: "{{ image }}"
+        image:
+          id: "{{ image }}"
         wait: true
         region: "{{ region }}"
         vpc_subnet_id: subnet-0d493668
-        assign_public_ip: yes
-        instance_tags:
+        state: running
+        network:
+          assign_public_ip: yes
+        tags:
           Name: Check-Instance
       register: ec2
 
+#    - name: Get EC2.INSTANCES information
+#      debug:
+#        msg: "{{ ec2.instances }}"
+
     - name: Add new instance to host group
       add_host:
-        hostname: "{{ item.public_ip }}"
-        groupname: launched
+        name: "{{ item.public_ip_address }}"
+        groups: launched
       loop: "{{ ec2.instances }}"
 
     - name: Wait for SSH to come up
-      delegate_to: "{{ item.public_ip }}"
       wait_for_connection:
-        delay: 30
-        timeout: 120
-      loop: "{{ ec2.instances }}"
+        delay: 15
+        timeout: 40
 
-    - name: Set Instance_Id variable to pass to next play.
+    - name: Set Instance_Id variable to pass to next plan.
       set_fact:
         Instance_Id: "{{ ec2.instance_ids }}"
 
-- name: New play to execute role
+- name: Execute role fail but task to continue.
   hosts: launched
   become: True
-  gather_facts: True
-  roles:
-    - "{{ ENV }}"
-  ignore_errors: True
-
-- name: Terminate instances
-  hosts: localhost
+  gather_facts: Yes
   tasks:
-    - name: Terminate instances that were previously launched
-      ec2:
-        state: 'absent'
-        instance_ids: '{{ Instance_Id }}'
-        region: us-east-1
+    - name: set the facts per host
+      set_fact:
+        INSTANCE_ID: "{{ hostvars['localhost']['Instance_Id'] }}"
 
+    - name: New play to execute role to test
+      block:
+        - name: Import a test role
+          ansible.builtin.import_role:
+            name: "{{ role_name }}"
+#         ignore_errors: True
 
-#
-#- name: Create a sandbox instance
-#  hosts: localhost
-#  gather_facts: False
-#  vars:
-#    instance_type: t3.micro
-#    security_group_id: sg-03dc99c7c771a43f0
-#    image: ami-0b55b2bdf150da270
-#    region: us-east-1
-#  tasks:
-#    - name: Create a new spot request
-#      amazon.aws.ec2_spot_instance:
-#        region: "{{ region }}"
-#        spot_type: persistent
-#        spot_price: 0.02
-#        interruption: stop
-#        launch_specification:
-#          security_group_ids : "{{ security_group_id }}"
-#          instance_type: "{{ instance_type }}"
-#          image_id: "{{ image }}"
-#          subnet_id: subnet-0d493668
-#        tags:
-#          Name: Check-Instance
-#      register: spotEc2
-#
-#    - name: Spot Request Termination
-#      amazon.aws.ec2_spot_instance:
-#        spot_instance_request_ids: "{{ spotEc2.spot_instance_request_id }}"
-#        state: absent
+      always:
+        - name: Terminate instances that were previously launched
+          delegate_to: 127.0.0.1
+          amazon.aws.ec2_instance:
+            state: absent
+            instance_ids: "{{ INSTANCE_ID }}"
+            region: us-east-1

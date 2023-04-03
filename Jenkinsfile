@@ -2,6 +2,13 @@ pipeline {
   agent {
     label 'Group1'
   }
+  options {
+    ansiColor('xterm')
+  }
+  environment {
+    SSH = credentials ('SSH')
+  }
+
 
   environment {
     SSH = credentials (SSH)
