@@ -21,7 +21,7 @@ pipeline {
     stage ('PR') {
       when { branch pattern: "PR-.*", comparator: "REGEXP"}
       steps {
-        sh 'env'
+        sh 'env '
         sh 'echo This is a PR'
       }
     }
