@@ -11,6 +11,7 @@ pipeline {
 
   stages {
     stage ('Feature branch') {
+      when { not { branch 'main' } }
       steps {
         sh 'env'
         sh 'echo This is a feature branch'
@@ -18,6 +19,7 @@ pipeline {
     }
 
     stage ('PR') {
+      when { branch pattern: "PR-.*", comparator: "REGEXP"}
       steps {
         sh 'env'
         sh 'echo This is a PR'
