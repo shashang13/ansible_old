@@ -13,8 +13,8 @@ pipeline {
     stage ('Feature branch') {
       when { branch pattern: "ROB-.*", comparator: "REGEXP" }
       steps {
-        sh 'env'
-        sh 'echo This is a feature branch'
+//         sh 'env'
+        sh 'echo Executed Ansible style check'
       }
     }
 
