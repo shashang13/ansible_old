@@ -11,7 +11,7 @@ pipeline {
 
   stages {
     stage ('Feature branch') {
-      when { not { branch 'main' } }
+      when { branch pattern: "ROB-.*", comparator: "REGEXP" }
       steps {
         sh 'env'
         sh 'echo This is a feature branch'
