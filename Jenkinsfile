@@ -12,12 +12,12 @@ pipeline {
   stages {
     stage ('Feature branch') {
 //       when { branch pattern: "ROB-.*", comparator: "REGEXP" }
-     when {
-        branch ".*"
-        not {branch 'main'}
-     }
+//      when {
+//         not {branch 'main'}
+//         branch ".*"
+//      }
       steps {
-//         sh 'env'
+        sh 'env'
         sh 'echo Executed Ansible style check'
       }
     }
