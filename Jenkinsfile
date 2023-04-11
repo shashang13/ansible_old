@@ -13,10 +13,8 @@ pipeline {
     stage ('Feature branch') {
 //       when { branch pattern: "ROB-.*", comparator: "REGEXP" }
      when {
-      allOf {
-//         branch ".*"
+        branch ".*"
         not {branch 'main'}
-      }
      }
       steps {
 //         sh 'env'
