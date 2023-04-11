@@ -29,7 +29,8 @@ pipeline {
 //       }
 //     }
 
-    stage ('Test') {
+    stage ('MAIN') {
+      when { branch 'main'}
       steps{
         sh '''
           env
@@ -37,5 +38,13 @@ pipeline {
       }
     }
 
+    stage ('TAG') {
+      when { tag "*"}
+      steps{
+        sh '''
+          env
+        '''
+      }
+    }
  }
 }
