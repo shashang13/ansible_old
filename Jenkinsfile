@@ -30,9 +30,12 @@ pipeline {
 //     }
 
     stage ('Test') {
-      sh '''
-        env
-      '''
+      steps{
+        sh '''
+          env
+        '''
+      }
+
 
     }
 
