@@ -38,6 +38,7 @@ pipeline {
       }
     }
 
+
     stage ('TAG') {
       when { tag "*"}
       steps{
