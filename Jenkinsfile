@@ -14,7 +14,7 @@ pipeline {
 //       when { branch pattern: "ROB-.*", comparator: "REGEXP" }
      when {
       allOf {
-        branch ".*"
+//         branch ".*"
         not {branch 'main'}
       }
      }
