@@ -34,7 +34,7 @@ pipeline {
       when { branch 'main'}
       steps{
         dir('code'){
-          git branch: 'main', url: 'https://${GIT_USR}:${GIT_PSW}@github.com/shashang13/ansible.git'
+          git branch: 'main', url: "https://${GIT_USR}:${GIT_PSW}@github.com/shashang13/ansible.git"
           sh '''
             C_Tag=$(git tag --format="%(creatordate:unix)%09%(refname:strip=2)"|sort -nr -k1|head -1|awk '{print $2}')
             i_num=`echo ${C_Tag}|awk -F . '{print $3}'`
