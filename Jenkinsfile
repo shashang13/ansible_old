@@ -39,7 +39,8 @@ pipeline {
             i_num=`echo ${C_Tag}|awk -F . '{print $3}'`
             i_num=$((i_num+1))
             Tag=$(echo ${C_Tag}|cut -c -4)
-            echo $(N_Tag=${Tag}${i_num})
+            N_Tag=${Tag}${i_num}
+            echo ${N_Tag}
           '''
         }
       }
