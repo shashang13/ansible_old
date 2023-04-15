@@ -40,7 +40,8 @@ pipeline {
             i_num=$((i_num+1))
             Tag=$(echo ${C_Tag}|cut -c -4)
             N_Tag=${Tag}${i_num}
-            echo ${N_Tag}
+            git tag ${N_Tag}
+            git push --tags
           '''
         }
       }
