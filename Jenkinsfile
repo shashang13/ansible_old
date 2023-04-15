@@ -38,8 +38,8 @@ pipeline {
             C_Tag=$(git tag --format="%(creatordate:unix)%09%(refname:strip=2)"|sort -nr -k1|head -1|awk '{print $2}')
             i_num=`echo ${C_Tag}|awk -F . '{print $3}'`
             i_num=$((i_num+1))
-            N_Tag=$(cut -c -4 C_Tag)
-            echo "${N_Tag} ${i_num}"
+            Tag=$(echo ${C_Tag}|cut -c -4)
+            N_Tag=${Tag}${i_num}
           '''
         }
       }
