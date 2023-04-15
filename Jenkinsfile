@@ -35,20 +35,14 @@ pipeline {
         dir('code'){
           git branch: 'main', url: 'https://github.com/shashang13/ansible.git'
           sh '''
-            env
-            git tag -l
-            git tag --format="%(creatordate:unix)%09%(refname:strip=2)"|sort -nr -k1|head -1|awk '{print $2}'
+            C_Tag=$(git tag --format="%(creatordate:unix)%09%(refname:strip=2)"|sort -nr -k1|head -1|awk '{print $2}')
+            i_num=$(git tag --format="%(creatordate:unix)%09%(refname:strip=2)"|sort -nr -k1|head -1|awk '{print $2}'|awk -F . {print $3})
+            i_num=i_num+1
+            N_Tag=$(cut -c -4 C_Tag)
+            echo "${N_Tag} ${i_num}"
           '''
         }
       }
     }
-
-//     stage ('TAG') {
-//       when { tag "*"}
-//       steps{
-//         sh '''
-//         '''
-//       }
-//     }
- }
+  }
 }
