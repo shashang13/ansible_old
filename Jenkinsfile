@@ -35,7 +35,7 @@ pipeline {
         sh '''
           env
           git tag -l
-//           git tag --format="%(creatordate:unix)%09%(refname:strip=2)"|sort -nr -k1|head -1|awk '{print $2}'
+#          git tag --format="%(creatordate:unix)%09%(refname:strip=2)"|sort -nr -k1|head -1|awk '{print $2}'
         '''
       }
     }
