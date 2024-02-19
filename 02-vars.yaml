@@ -54,8 +54,8 @@
 
     - name: Registered variable
       ansible.builtin.debug:
-        msg: "{{OUT.stdout}}"
+        msg: "{{OUT}}"
 
-    - name: Print OUTPUT var
+    - name: Print Set Fact var
       ansible.builtin.debug:
         msg: "{{OUTPUT}}"
